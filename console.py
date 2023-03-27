@@ -51,8 +51,8 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     var = eval(attributes[1])
                     attributes[1] = var
-                except:
-                    pass
+                except AttributeError:
+                    continue
                 if type(attributes[1]) is not tuple:
                     setattr(obj, attributes[0], attributes[1])
             obj.save()
