@@ -12,54 +12,26 @@ else
 	echo "Nginx has been successfully installed"
 fi
 
-# create folder /data/ if it doesnt already exist
-if [ ! -d "/data/" ]
-then
-	mkdir /data/
-	echo "Created /data/ folder"
-else
-	echo "/data/ folder already exists"
-fi
+# create necessary folders if they dont exist
+keyFolders=("/data/"
+			"/data/web_static/"
+			"/data/web_static/releases/"
+			"/data/web_static/shared/"
+			"/data/web_static/releases/test/")
 
-# create folder /data/web_static/ if doesnt exist
-if [ ! -d "/data/web_static/" ]
-then
-	mkdir /data/web_static/
-	echo "created /data/web_static/ folder"
-else
-	echo "/data/web_static/ folder already exists"
-fi
+for folder in "${keyFolders[@]}"
+do
+	if [ ! -d "$folder" ]
+	then
+		mkdir "$folder"
+		echo "created $folder"
+	else
+		echo "$folder already exists"
+	fi
+done
 
-# create folder /data/web_static/releases/ if it doesnt exist
-if [ ! -d "/data/web_static/releases/" ]
-then
-	mkdir /data/web_static/releases/
-	echo "created /data/web_static/releases/ folder"
-else
-	echo "/data/web_static/releases/ folder already exists"
-fi
+# create fake HTML file to test Nginx configuration
+echo "Nginx test page" > /data/web_static/releases/test/index.html
 
-# create folder /data/web_static/shared/ if it doesnt exist
-if [ ! -d "/data/web_static/shared/" ]
-then
-	mkdir /data/web_static/shared/
-	echo "/data/web_static/shared/ folder created"
-else
-	echo "/data/web_static/shared/ already exists"
-fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# create symbolic link
+ln -sf /data/web_static/releases/test/ /data/web_static/current
