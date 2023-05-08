@@ -31,9 +31,8 @@ def default_text(text):
     return "Python {}".format(text)
 
 
-@app.route('/number/<n>')
+@app.route('/number/<int:n>')
 def is_number(n):
-    n = int(n)
     return "{} is a number".format(n)
 
 
