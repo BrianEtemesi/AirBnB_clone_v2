@@ -43,7 +43,6 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
-            print(obj.id)
             print("{}".format(obj.id))
             for num in range(1, len(my_list)):
                 my_list[num] = my_list[num].replace('=', ' ')
