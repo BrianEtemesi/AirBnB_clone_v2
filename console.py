@@ -43,14 +43,25 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            print(obj.id)
             print("{}".format(obj.id))
             for num in range(1, len(my_list)):
                 my_list[num] = my_list[num].replace('=', ' ')
-                attributes = split(my_list[num])
+                attributes = my_list[num].split()
                 attributes[1] = attributes[1].replace('_', ' ')
                 try:
                     var = eval(attributes[1])
-                    attributes[1] = var
+                    if var.find('.') == 1:
+                        try:
+                            attributes[1] = float(var)
+                        except ValueError:
+                            attributes[1] = var
+                    else:
+                        try:
+                            attributes[1] = int(var)
+                        except ValueError:
+                            attributes[1] = var
+
                 except AttributeError:
                     continue
                 if type(attributes[1]) is not tuple:

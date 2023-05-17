@@ -10,7 +10,8 @@ import shlex
 
 
 class State(BaseModel, Base):
-    """This is the class for State
+    """
+    This is the class for State
     Attributes:
         name: input name
     """
@@ -22,14 +23,14 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         var = models.storage.all()
-        lista = []
+        list_a = []
         result = []
         for key in var:
             city = key.replace('.', ' ')
             city = shlex.split(city)
             if (city[0] == 'City'):
-                lista.append(var[key])
-        for elem in lista:
+                list_a.append(var[key])
+        for elem in list_a:
             if (elem.state_id == self.id):
                 result.append(elem)
         return (result)
