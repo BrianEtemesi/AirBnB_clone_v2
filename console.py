@@ -33,7 +33,12 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it
+        """
+        Creates a new instance of BaseModel, saves it
+        Command syntax: create <Class name> <param 1> <param 2> <param 3>...
+        eg: 
+            create State name="California"
+            create User age=27
         Exceptions:
             SyntaxError: when there is no args given
             NameError: when there is no object taht has the name
