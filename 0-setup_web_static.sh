@@ -35,3 +35,6 @@ echo "Nginx test page" > /data/web_static/releases/test/index.html
 
 # create symbolic link
 ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+# change ownership of the /data/ folder to ubuntu user and group
+chown -R ubuntu:ubuntu /data/
