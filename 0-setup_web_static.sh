@@ -30,14 +30,14 @@ do
 	fi
 done
 
-# change ownership of the /data/ folder to ubuntu user and group
-sudo chown -R ubuntu:ubuntu /data/
-
 # create fake HTML file to test Nginx configuration
 echo "Nginx test page" > sudo tee /data/web_static/releases/test/index.html
 
 # create symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+# change ownership of the /data/ folder to ubuntu user and group
+sudo chown -R ubuntu:ubuntu /data/
 
 # Add an alias to serve the content of /data/web_static/current/ to hbnb_static
 nginx_config_path="/etc/nginx/sites-available/default"
