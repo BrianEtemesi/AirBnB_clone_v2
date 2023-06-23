@@ -8,7 +8,7 @@ then
 else
 	echo "Installing Nginx..."
 	sudo apt-get update
-	sudo apt-get install nginx
+	sudo apt-get install nginx -y
 	echo "Nginx has been successfully installed"
 fi
 
@@ -34,7 +34,7 @@ done
 sudo chown -R ubuntu:ubuntu /data/
 
 # create fake HTML file to test Nginx configuration
-echo "Nginx test page" > /data/web_static/releases/test/index.html
+echo "Nginx test page" > sudo tee /data/web_static/releases/test/index.html
 
 # create symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
