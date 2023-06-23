@@ -37,7 +37,7 @@ sudo chown -R ubuntu:ubuntu /data/
 echo "Nginx test page" > /data/web_static/releases/test/index.html
 
 # create symbolic link
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Add an alias to serve the content of /data/web_static/current/ to hbnb_static
 nginx_config_path="/etc/nginx/sites-available/default"
