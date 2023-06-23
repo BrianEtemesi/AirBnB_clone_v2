@@ -1,10 +1,24 @@
-from fabric import task
+#!/usr/bin/python3
+"""
+fabric script to generate a .tgz archive
+"""
+from fabric.api import local
+from datetime import datetime
 
-@task
-def hello(c):
+
+def do_pack():
     """
-    Prints a hello message.
+    Create a .tgz archive from the contents of the web_static folder.
     """
-    print("Hello, Fabric!")
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    archive_name = "web_static_{}.tgz".format(timestamp)
+    archive_path = "versions/{}".format(archive_name)
 
+    local("mkdir -p versions")
 
+    result = local("tar -czvf {} web_static".format(archive_path))
+
+    if result.failed:
+        return None
+    else:
+        return archive_path
