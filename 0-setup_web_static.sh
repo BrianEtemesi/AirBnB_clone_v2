@@ -31,7 +31,7 @@ do
 done
 
 # create fake HTML file to test Nginx configuration
-echo "Nginx test page" > sudo tee /data/web_static/releases/test/index.html
+echo "Nginx test page" | sudo tee /data/web_static/releases/test/index.html
 
 # create symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
