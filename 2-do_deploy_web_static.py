@@ -8,8 +8,6 @@ import os
 
 
 env.hosts = ['100.25.137.152', '35.168.1.108']
-env.user = 'ubuntu'
-
 
 def do_deploy(archive_path):
     """
