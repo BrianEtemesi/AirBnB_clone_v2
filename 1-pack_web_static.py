@@ -16,9 +16,9 @@ def do_pack():
 
     local("mkdir -p versions")
 
-    result = local("tar -cvzf {} --exclude='.*' web_static".format(archive_path))
+    result = local("tar -cvzf {} web_static".format(archive_path))
 
-    if result.failed:
-        return None
-    else:
+    if result.succedded:
         return archive_path
+    else:
+        return None
