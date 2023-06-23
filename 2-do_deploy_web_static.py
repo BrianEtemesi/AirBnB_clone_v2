@@ -9,6 +9,7 @@ import os
 
 env.hosts = ['100.25.137.152', '35.168.1.108']
 
+
 def do_deploy(archive_path):
     """
     Distributes an archive to web servers
@@ -23,7 +24,7 @@ def do_deploy(archive_path):
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, '/tmp/')
 
-        # Extract the archive to /data/web_static/releases/<archive filename without extension>
+        # Extract the archive to /data/web_static/releases/<file>
         remote_folder = "/data/web_static/releases/{}/".format(uncompressed)
         symbolic_conn = "/data/web_static/current"
 
@@ -31,12 +32,12 @@ def do_deploy(archive_path):
         run("tar -xvzf /tmp/{} -C {}".format(compressed, remote_folder))
         run("rm /tmp/{}".format(compressed))
         run("mv {}/web_static/* {}".format(remote_folder, remote_folder))
-        
+
         # Delete the symbolic link /data/web_static/current
         run("rm -rf {}/web_static".format(remote_folder))
         run('rm -rf /data/web_static/current')
 
-        # Create a new symbolic link /data/web_static/current linked to the new version
+        # Create a new symbolic link /data/web_static/current
         run("ln -sf {} {}".format(remote_folder, symbolic_conn))
 
         print("New version deployed!")
