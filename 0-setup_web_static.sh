@@ -23,12 +23,15 @@ for folder in "${keyFolders[@]}"
 do
 	if [ ! -d "$folder" ]
 	then
-		mkdir "$folder"
+		sudo mkdir "$folder"
 		echo "created $folder"
 	else
 		echo "$folder already exists"
 	fi
 done
+
+# change ownership of the /data/ folder to ubuntu user and group
+sudo chown -R ubuntu:ubuntu /data/
 
 # create fake HTML file to test Nginx configuration
 echo "Nginx test page" > /data/web_static/releases/test/index.html
@@ -36,5 +39,9 @@ echo "Nginx test page" > /data/web_static/releases/test/index.html
 # create symbolic link
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-# change ownership of the /data/ folder to ubuntu user and group
-chown -R ubuntu:ubuntu /data/
+# Add an alias to serve the content of /data/web_static/current/ to hbnb_static
+nginx_config_path="/etc/nginx/sites-available/default"
+sudo sed -i '/listen 80 default_server;/a \ \n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_config_path"
+
+# restart nginx to apply changes
+sudo service nginx restart
